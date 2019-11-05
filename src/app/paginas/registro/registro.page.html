@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)='volverClick()'>
+          <ion-icon name="arrow-back"></ion-icon> 
+      </ion-button>
+      <ion-title>{{textosIdioma.titulo}}</ion-title>  
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+          <ion-label position='floating'>{{textosIdioma.nombre}}</ion-label>
+          <ion-input maxlength={{datosApp.tamanoAtributos.nombreUsuario}} [(ngModel)]='form.nombre'></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position='floating'>{{textosIdioma.apellidos}}</ion-label>
+            <ion-input maxlength={{datosApp.tamanoAtributos.apellidos}} [(ngModel)]='form.apellidos'></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position='floating'>{{textosIdioma.mail}}</ion-label>
+              <ion-input maxlength={{datosApp.tamanoAtributos.mail}} type='mail' [(ngModel)]='form.mail'></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position='floating'>{{textosIdioma.clave}}</ion-label>
+              <ion-input maxlength={{datosApp.tamanoAtributos.clave}} type='password' [(ngModel)]='form.clave'></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position='floating'>{{textosIdioma.clave2}}</ion-label>
+              <ion-input maxlength={{datosApp.tamanoAtributos.clave}} type='password' [(ngModel)]='form.clave2'></ion-input>
+          </ion-item>  
+            
+
+        
+    </ion-list>
+    <ion-button shape='round' fill='outline' 
+        (click)='guardarClick()'>
+        {{textosIdioma.guardar}}
+    </ion-button>
+
+</ion-content>

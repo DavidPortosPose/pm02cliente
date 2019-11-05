@@ -1,5 +1,7 @@
 {
   "name": "pm02",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,0 +1,25 @@
+<ion-header>
+  
+</ion-header>
+
+<ion-content padding>
+ <ion-grid style='height: 100%' text-center>
+   <ion-row justify-content-center align-items-center
+   style='height: 100%; flex-direction: column'>
+      <h1 no-margin no-padding>{{textosIdioma.nombreApp}} {{datosApp.version}}</h1>
+      
+      {{textosIdioma.bienvenido}}
+     
+      <ion-button shape='round' fill='clear' 
+      (click)='botonIdiomaClick()'> {{textosIdioma.idioma}}</ion-button>
+      <br> <br>
+      <ion-button shape='round' fill='outline' 
+      (click)='loginClick()'> {{textosIdioma.iniciar}}</ion-button>
+      <h1></h1><h1></h1>
+
+      <ion-button shape='round' fill='clear' 
+      (click)='registroClick()'> {{textosIdioma.noCuenta}}</ion-button>
+    </ion-row>   
+</ion-grid> 
+  
+</ion-content>
