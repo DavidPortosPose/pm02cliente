@@ -25,6 +25,10 @@ export class LoginPage implements OnInit {
     this.setIdioma();
     this.clienteRest01 = new ClienteRest01(datosApp);
     this.principalParams = null;
+    if(datosApp.modoDesarrollo) {
+      this.form.mail = 'david.ppose@gmail.com';
+      this.form.clave = 'Abc123..';
+    }
   }
 
   ngOnInit() {

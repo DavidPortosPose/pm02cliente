@@ -35,6 +35,8 @@ export class DatosAppService {
     clave: 15
   }
 
+  public modoDesarrollo = true;
+
   constructor(public navCtrl: NavController,
               public actionSheetController: ActionSheetController,
               public toastController: ToastController,
