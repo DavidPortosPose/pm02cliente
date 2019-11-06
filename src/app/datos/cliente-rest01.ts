@@ -3,6 +3,23 @@ import { DatosAppService, Idioma } from './datos-app.service';
 import { DatosEnviar } from '../lib/clases/http';
 import { ClienteRest } from '../lib/clases/cliente-rest';
 export class ClienteRest01 extends ClienteRest {
+   
+    public tablaUsuario = { // DEFINICION DE DATOS CONEXION A BASE DE DATOS. NO LA CONECTA.
+        idUsuario: 'ID_USUARIO',
+        nombre: 'NOMBRE',
+        apellidos: 'APELLIDOS',
+        mail: 'MAIL',
+        clave: 'CLAVE',
+        activo: 'ACTIVO'
+    };
+    public tablaSesion = { // DEFINICION DE DATOS CONEXION A BASE DE DATOS. NO LA CONECTA.
+        idsesion: 'ID_SESION',
+        idUsuario: 'ID_USUARIO',
+        fechaInicio: 'FECHA_INICIO',
+        fechaAcceso: 'FECHA_ACCESO',
+        fechaFin: 'FECHA_FIN',
+        ip: 'IP'
+    };
     private textosIdioma: ClienteRest01Idioma;
     constructor(private datosApp: DatosAppService) {
         super(datosApp.http, datosApp.mensaje);

@@ -25,9 +25,9 @@ export class LoginPage implements OnInit {
     this.setIdioma();
     this.clienteRest01 = new ClienteRest01(datosApp);
     this.principalParams = null;
-    if(datosApp.modoDesarrollo) {
+    if (datosApp.modoDesarrollo) {
       this.form.mail = 'david.ppose@gmail.com';
-      this.form.clave = 'Abc123..';
+      this.form.clave = '12345.As';
     }
   }
 
@@ -51,7 +51,9 @@ export class LoginPage implements OnInit {
       this.clienteRest01.mostrarMensajeError();
       
     } else {
-     
+      // tslint:disable-next-line: max-line-length
+      this.datosApp.abrirSesion(this.clienteRest01.rows[0][this.clienteRest01.tablaSesion.idsesion]); // llama a la variable. Fácil mantenimiento futuro por si se cambia el contenido de la variable.
+      this.datosApp.abrirSesion(this.clienteRest01.rows[0].ID_SESION);
       this.principalParams = new PrincipalParams();
       this.datosApp.pilaParams.push(this.principalParams);
     }
@@ -86,10 +88,7 @@ export class LoginPage implements OnInit {
  
    
 
-  public volverClick() {
-    this.loginParams.parametrosSalida.cancelar = true;
-    this.datosApp.pilaParams.pop();
-  }
+
 
   private setIdioma() {
     switch (this.datosApp.idioma) {
@@ -107,6 +106,10 @@ export class LoginPage implements OnInit {
       
     }
 
+  }
+  public volverClick() {
+    this.loginParams.parametrosSalida.cancelar = true;
+    this.datosApp.pilaParams.pop();
   }
 
 
