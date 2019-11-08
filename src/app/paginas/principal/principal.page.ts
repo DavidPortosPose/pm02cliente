@@ -1,6 +1,6 @@
-import { DatosAppService, Idioma } from './../../datos/datos-app.service';
-import { PrincipalIdioma, PrincipalIdiomaEn, PrincipalIdiomaGl, PrincipalIdiomaEs } from './principal.idioma';
 import { PrincipalParams } from './principal.params';
+import { PrincipalIdioma, PrincipalIdiomaEn, PrincipalIdiomaGl, PrincipalIdiomaEs } from './principal.idioma';
+import { DatosAppService, Idioma } from './../../datos/datos-app.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,18 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-  private principalParams: PrincipalParams;
   public textosIdioma: PrincipalIdioma;
+  private principalParams: PrincipalParams;
+  
   constructor(private datosApp: DatosAppService) { 
     this.setIdioma();
     this.principalParams = datosApp.pilaParams.getTop() as PrincipalParams;
-
   }
 
   ngOnInit() {
   }
 
- 
   private setIdioma() {
     switch (this.datosApp.idioma) {
       case Idioma.EN: this.textosIdioma = new PrincipalIdiomaEn();
@@ -35,6 +34,5 @@ export class PrincipalPage implements OnInit {
     this.principalParams.parametrosSalida.cancelar = true;
     this.datosApp.pilaParams.pop();
   }
-
 
 }

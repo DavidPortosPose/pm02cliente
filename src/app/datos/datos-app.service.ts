@@ -27,14 +27,13 @@ export class DatosAppService {
   public http: Http;
   private urlRestService = 'http://127.0.0.1:8081';
   private rutaRestService = '/dual2/peticion2';
-  private IdSesion: string;
+  public idSesion: string;
   public tamanoAtributos = {
     nombreUsuario : 50,
     apellidos: 70,
     mail: 50,
     clave: 15
   }
-
   public modoDesarrollo = true;
 
   constructor(public navCtrl: NavController,
@@ -43,7 +42,7 @@ export class DatosAppService {
               public httpc: HttpClient) {
     this.version = '1.0';
     this.idioma = Idioma.ES;
-    this.IdSesion = '';
+    this.idSesion = '';
     this.pilaParams = new PilaParams(navCtrl);
     this.pilaParams.push(new HomeParams());
     this.util = new Util();
@@ -51,10 +50,10 @@ export class DatosAppService {
     this.http = new Http(httpc, this.urlRestService, this.rutaRestService);
    }
 public abrirSesion(idSesion: string) {
-  this.IdSesion = idSesion;
+  this.idSesion = idSesion;
 }
 public cerrarSesion() {
-  this.IdSesion = '';
+  this.idSesion = '';
 }
 
 

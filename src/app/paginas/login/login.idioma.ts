@@ -16,7 +16,7 @@ export class LoginIdiomaEs extends LoginIdioma {
         this.clave = 'Clave';
         this.iniciar = 'Iniciar';
         this.errorMail = 'Error en el mail';
-        this.errorClave = 'Error en la contraseña';
+        this.errorClave = 'Error en la clave';
         this.errorLogin = 'Mail o clave erróneos';
 
     }
@@ -28,7 +28,7 @@ export class LoginIdiomaGl extends LoginIdioma {
         this.titulo = 'Login';
         this.usuario = 'Mail';
         this.clave = 'Contrasinal';
-        this.iniciar = 'Comezar';
+        this.iniciar = 'Iniciar';
         this.errorMail = 'Erro no mail';
         this.errorClave = 'Erro no contrasinal';
         this.errorLogin = 'Mail ou contrasinal erróneos';

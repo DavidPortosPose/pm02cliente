@@ -67,9 +67,10 @@ private comprobarForm(): boolean {
  return resultado;
 }
 
+
 private restUsuarioAnadirCb2(){
   if (this.clienteRest01.error){
-   this.clienteRest01.mostrarMensajeError();
+    this.clienteRest01.mostrarMensajeError();
   } else {
     this.datosApp.mensaje.mostrarMensajeOk(this.textosIdioma.datosGuardados);
     this.registroParams.parametrosSalida.ok = true;
@@ -81,7 +82,7 @@ private restUsuarioAnadirCb(miPagina: object){
   estaPagina.restUsuarioAnadirCb2();
 }
 private restUsuarioAnadir(){
-  this.clienteRest01.setRetorno(this, this.restUsuarioAnadirCb);
+  this.clienteRest01.setRetorno(this, this.restUsuarioAnadirCb)
 
   this.clienteRest01.usuarioInsert(this.form.nombre,
     this.form.apellidos, this.form.mail, this.form.clave);
