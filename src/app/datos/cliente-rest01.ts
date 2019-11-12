@@ -104,6 +104,17 @@ public mostrarMensajeError(){
         this.peticionRest(datosEnviar);
     }
 
+    public empresaSelectId(idEmpresa: string){
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_EMPRESA_S_ID',
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['idEmpresa'] : idEmpresa
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
     public empresaInsert(nombre: string){
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_EMPRESA_I',

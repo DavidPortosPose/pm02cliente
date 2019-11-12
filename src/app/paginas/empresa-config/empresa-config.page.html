@@ -12,11 +12,8 @@
       <ion-icon name="menu"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="bottom">
-      <ion-fab-button (click)='empresaConfigClick()'>
-        <ion-icon name="analytics"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="body"></ion-icon>
+      <ion-fab-button (click)="empresaEditClick()">
+        <ion-icon name="add"></ion-icon>
       </ion-fab-button>
       
     </ion-fab-list>    
@@ -24,5 +21,11 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+        <ion-button fill='clear' 
+      (click)='empresaClick(item)'> {{item.NOMBRE}} </ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
