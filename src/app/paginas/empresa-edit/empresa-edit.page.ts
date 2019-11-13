@@ -17,11 +17,14 @@ export class EmpresaEditPage implements OnInit {
     nombre : ''
   }
 
-  
+
   constructor(private datosApp: DatosAppService) { 
     this.setIdioma();
     this.empresaEditParams = datosApp.pilaParams.getTop() as EmpresaEditParams;
     this.clienteRest01 = new ClienteRest01(datosApp);
+    if (! this.empresaEditParams.parametrosEntrada.nuevo){
+      this.restEmpresaSelectId();
+    }
   }
 
   ngOnInit() {
@@ -65,6 +68,65 @@ export class EmpresaEditPage implements OnInit {
     this.clienteRest01.empresaInsert(this.form.nombre);
   }
 
+  private restEmpresaSelectIdCb2(){
+    if (this.clienteRest01.error) {
+      this.clienteRest01.mostrarMensajeError();
+    } else {
+      this.form.nombre = this.clienteRest01.rows[0][this.clienteRest01.tablaEmpresa.nombre];
+    }
+  }
+  private restEmpresaSelectIdCb(miPagina: object){
+    const estaPagina: EmpresaEditPage = miPagina as EmpresaEditPage;
+    estaPagina.restEmpresaSelectIdCb2();
+  }
+  private restEmpresaSelectId(){
+    this.clienteRest01.setRetorno(this, this.restEmpresaSelectIdCb);
+    this.clienteRest01.empresaSelectId(this.empresaEditParams.parametrosEntrada.idEmpresa);
+  }
+
+  private restEmpresaUpdateCb2(){
+    if (this.clienteRest01.error) {
+      this.clienteRest01.mostrarMensajeError();
+    } else {
+      this.datosApp.mensaje.mostrarMensajeOk(this.textosIdioma.operacionOk);
+      this.empresaEditParams.parametrosSalida.ok = true;
+      this.datosApp.pilaParams.pop();
+    }
+  }
+  private restEmpresaUpdateCb(miPagina: object){
+    const estaPagina: EmpresaEditPage = miPagina as EmpresaEditPage;
+    estaPagina.restEmpresaUpdateCb2();
+  }
+  private restEmpresaUpdate(){
+    this.clienteRest01.setRetorno(this, this.restEmpresaUpdateCb);
+    this.clienteRest01.empresaUpdateNombre(
+      this.empresaEditParams.parametrosEntrada.idEmpresa,
+      this.form.nombre);
+
+
+  }
+
+  private restEmpresaDeleteCb2(){
+    if (this.clienteRest01.error) {
+      this.clienteRest01.mostrarMensajeError();
+    } else {
+      this.datosApp.mensaje.mostrarMensajeOk(this.textosIdioma.operacionOk);
+      this.empresaEditParams.parametrosSalida.ok = true;
+      this.datosApp.pilaParams.pop();
+    }
+  }
+  private restEmpresaDeleteCb(miPagina: object) {
+    const estaPagina: EmpresaEditPage = miPagina as EmpresaEditPage;
+    estaPagina.restEmpresaDeleteCb2();
+  }
+  private restEmpresaDelete() {
+    this.clienteRest01.setRetorno(this, this.restEmpresaDeleteCb);
+    this.clienteRest01.empresaDelete(
+      this.empresaEditParams.parametrosEntrada.idEmpresa);
+
+
+  }
+
 
 
   public volverClick() {
@@ -73,9 +135,15 @@ export class EmpresaEditPage implements OnInit {
   }
 
   public aceptarClick(){
-    if (this.comprobarForm()){
-        if (this.empresaEditParams.parametrosEntrada.nuevo){
+    if (this.comprobarForm()) {
+        if (this.empresaEditParams.parametrosEntrada.nuevo) {
           this.restEmpresaInsert();
+        } else {
+         this.restEmpresaUpdate();
+
+        }
+        if (this.empresaEditParams.parametrosEntrada.idEmpresa) {
+          this.restEmpresaDelete();
         }
     }
   }

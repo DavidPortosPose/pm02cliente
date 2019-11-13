@@ -3,7 +3,7 @@ import { Http } from './../lib/clases/http';
 import { Mensaje } from './../lib/clases/mensaje';
 import { Util } from './../lib/clases/util';
 import { PilaParams } from './../lib/clases/pila-params';
-import { NavController, ActionSheetController, ToastController } from '@ionic/angular';
+import { NavController, ActionSheetController, ToastController, AlertController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { HomeParams } from '../paginas/home/home.params';
 
@@ -39,7 +39,8 @@ export class DatosAppService {
   constructor(public navCtrl: NavController,
               public actionSheetController: ActionSheetController,
               public toastController: ToastController,
-              public httpc: HttpClient) {
+              public httpc: HttpClient,
+              public alertController: AlertController) {
     this.version = '1.0';
     this.idioma = Idioma.ES;
     this.idSesion = '';

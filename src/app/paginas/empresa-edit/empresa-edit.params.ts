@@ -2,7 +2,8 @@ import { Params } from './../../lib/clases/params';
 export class EmpresaEditParams extends Params{
 
     public parametrosEntrada = {
-        nuevo: true
+        nuevo: true,
+        idEmpresa: ''
     };
 
     public parametrosSalida = {

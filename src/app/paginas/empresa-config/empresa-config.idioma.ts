@@ -3,6 +3,8 @@ export class EmpresaConfigIdioma {
     public editar: string;
     public borrar: string;
     public cancelar: string;
+    public aceptar: string;
+    public confirmeBorrado: string;
 }
 
 export class EmpresaConfigIdiomaEs extends EmpresaConfigIdioma {
@@ -12,6 +14,8 @@ export class EmpresaConfigIdiomaEs extends EmpresaConfigIdioma {
         this.editar = 'Editar';
         this.borrar = 'Borrar';
         this.cancelar = 'Cancelar';
+        this.aceptar = 'Aceptar';
+        this.confirmeBorrado = 'Confirme Borrado';
     }
 }
 
@@ -22,6 +26,8 @@ export class EmpresaConfigIdiomaGl extends EmpresaConfigIdioma {
         this.editar = 'Editar';
         this.borrar = 'Borrar';
         this.cancelar = 'Cancelar';
+        this.aceptar = 'Aceptar';
+        this.confirmeBorrado = 'Confirme Borrado';
     }
 }
 
@@ -32,5 +38,7 @@ export class EmpresaConfigIdiomaEn extends EmpresaConfigIdioma {
         this.editar = 'Edit';
         this.borrar = 'Delete';
         this.cancelar = 'Cancel';
+        this.aceptar = 'Accept';
+        this.confirmeBorrado = 'Confirm delete';
     }
 }
