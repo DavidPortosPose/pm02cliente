@@ -1,5 +1,5 @@
 import { Params } from './../../lib/clases/params';
-export class EmpresaEditParams extends Params{
+export class EmpresaEditParams extends Params {
 
     public parametrosEntrada = {
         nuevo: true,

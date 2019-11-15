@@ -127,6 +127,27 @@ export class EmpresaEditPage implements OnInit {
 
   }
 
+  private restEmpresacancelarCb2() {
+    if (this.clienteRest01.error) {
+      this.clienteRest01.mostrarMensajeError();
+    } else {
+      this.datosApp.mensaje.mostrarMensajeOk(this.textosIdioma.operacionOk);
+      this.empresaEditParams.parametrosSalida.ok = true;
+      this.datosApp.pilaParams.pop();
+    }
+  }
+  private restEmpresaCancelarCb(miPagina: object) {
+    const estaPagina: EmpresaEditPage = miPagina as EmpresaEditPage;
+    estaPagina.restEmpresaDeleteCb2();
+  }
+  private restEmpresaCancelar() {
+    this.clienteRest01.setRetorno(this, this.restEmpresaDeleteCb);
+    this.clienteRest01.empresaDelete(
+      this.empresaEditParams.parametrosEntrada.idEmpresa);
+
+
+  }
+
 
 
   public volverClick() {

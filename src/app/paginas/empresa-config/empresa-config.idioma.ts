@@ -5,6 +5,9 @@ export class EmpresaConfigIdioma {
     public cancelar: string;
     public aceptar: string;
     public confirmeBorrado: string;
+    public activar: string;
+    public desactivar: string;
+    public noActivos: string;
 }
 
 export class EmpresaConfigIdiomaEs extends EmpresaConfigIdioma {
@@ -16,6 +19,9 @@ export class EmpresaConfigIdiomaEs extends EmpresaConfigIdioma {
         this.cancelar = 'Cancelar';
         this.aceptar = 'Aceptar';
         this.confirmeBorrado = 'Confirme Borrado';
+        this.activar = 'Activar';
+        this.desactivar = 'Desactivar';
+        this.noActivos = 'No activos';
     }
 }
 
@@ -28,6 +34,9 @@ export class EmpresaConfigIdiomaGl extends EmpresaConfigIdioma {
         this.cancelar = 'Cancelar';
         this.aceptar = 'Aceptar';
         this.confirmeBorrado = 'Confirme Borrado';
+        this.activar = 'Activar';
+        this.desactivar = 'Desactivar';
+        this.noActivos = 'No activos';
     }
 }
 
@@ -40,5 +49,8 @@ export class EmpresaConfigIdiomaEn extends EmpresaConfigIdioma {
         this.cancelar = 'Cancel';
         this.aceptar = 'Accept';
         this.confirmeBorrado = 'Confirm delete';
+        this.activar = 'Enable';
+        this.desactivar = 'Disable';
+        this.noActivos = 'No actives';
     }
 }

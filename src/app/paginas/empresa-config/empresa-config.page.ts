@@ -53,30 +53,30 @@ export class EmpresaConfigPage implements OnInit {
     }
   }
 
-  private restEmpresaSelectCb2(){
+  private restEmpresaSelectCb2() {
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
         this.items = this.clienteRest01.rows;
     }
   }
-  private restEmpresaSelectCb(miPagina: object){
+  private restEmpresaSelectCb(miPagina: object) {
     const estaPagina: EmpresaConfigPage = miPagina as EmpresaConfigPage;
     estaPagina.restEmpresaSelectCb2();
   }
-  private restEmpresaSelect(){
+  private restEmpresaSelect() {
     this.clienteRest01.setRetorno(this, this.restEmpresaSelectCb);
     this.clienteRest01.empresaSelect(this.activo);
   }
 
-  private restEmpresaDeleteCb2(){
+  private restEmpresaDeleteCb2() {
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
       this.restEmpresaSelect();
     }
   }
-  private restEmpresaDeleteCb(miPagina: object){
+  private restEmpresaDeleteCb(miPagina: object) {
     const estaPagina: EmpresaConfigPage = miPagina as EmpresaConfigPage;
     estaPagina.restEmpresaDeleteCb2();
   }
@@ -85,18 +85,41 @@ export class EmpresaConfigPage implements OnInit {
     this.clienteRest01.empresaDelete(idEmpresa);
   }
 
+  private restEmpresUpdateActivoCb2() {
+    if (this.clienteRest01.error) {
+      this.clienteRest01.mostrarMensajeError();
+    } else {
+      this.restEmpresaSelect();
+    }
+  }
+  private restEmpresaUpdateActivoCb(miPagina: object) {
+    const estaPagina: EmpresaConfigPage = miPagina as EmpresaConfigPage;
+    estaPagina.restEmpresUpdateActivoCb2();
+  }
+  private restEmpresaUpdateActivo(idEmpresa: string, activo: boolean) {
+    this.clienteRest01.setRetorno(this, this.restEmpresaUpdateActivoCb);
+    this.clienteRest01.empresaUpdateActivo(idEmpresa, activo);
+  }
+
   public volverClick() {
     this.empresaConfigParams.parametrosSalida.cancelar = true;
     this.datosApp.pilaParams.pop();
   }
 
-  public empresaEditNuevoClick(){
+  public empresaEditNuevoClick() {
     this.empresaEditParams = new EmpresaEditParams();
     this.empresaEditParams.parametrosEntrada.nuevo = true;
     this.datosApp.pilaParams.push(this.empresaEditParams);
 }
 
+public verActivosClick() {
+  this.activo = !this.activo;
+  this.restEmpresaSelect();
+}
+
+
 async empresaClick(item) {
+  const activo = this.datosApp.util.stringToBoolean(item[this.clienteRest01.tablaEmpresa.activo]);
   const actionSheet = await this.datosApp.actionSheetController.create({
     header: item[this.clienteRest01.tablaEmpresa.nombre],
     buttons: [{
@@ -115,12 +138,22 @@ async empresaClick(item) {
         this.confirmarDelete(item);
       }
       }, {
+        text: activo ? this.textosIdioma.desactivar : this.textosIdioma.activar,
+        icon: activo ? 'eye-off' : 'eye',
+        handler: () => {
+          const idEmpresa = item[this.clienteRest01.tablaEmpresa.idEmpresa];
+          this.restEmpresaUpdateActivo(idEmpresa, !activo);
+        }
+      }, {
+      
         text: this.textosIdioma.cancelar,
         icon: 'close',
         role: 'cancel',
         handler: () => {
 
         }
+      
+      
     }]
   });
   await actionSheet.present();
