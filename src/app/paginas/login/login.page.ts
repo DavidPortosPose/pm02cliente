@@ -1,6 +1,6 @@
 import { PrincipalParams } from './../principal/principal.params';
 import { ClienteRest01 } from '../../datos/cliente-rest01';
-import { DatosAppService, Idioma } from './../../datos/datos-app.service';
+import { DatosAppService, Idioma, Rol } from './../../datos/datos-app.service';
 import { LoginParams } from './login.params';
 import { Component, OnInit } from '@angular/core';
 import { LoginIdioma, LoginIdiomaEn, LoginIdiomaGl, LoginIdiomaEs } from './login.idioma';
@@ -47,6 +47,10 @@ export class LoginPage implements OnInit {
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
+      const superAdmin = this.clienteRest01.rows[0].SUPER_ADMIN[this.clienteRest01.tablaUsuario.superAdmin];
+      if (this.datosApp.util.stringToBoolean(superAdmin)) {
+        this.datosApp.rol = Rol.ROL_SUPER_ADMIN;
+      }
       this.datosApp.abrirSesion(this.clienteRest01.rows[0][this.clienteRest01.tablaSesion.idSesion]);
       this.principalParams = new PrincipalParams();
       this.datosApp.pilaParams.push(this.principalParams);

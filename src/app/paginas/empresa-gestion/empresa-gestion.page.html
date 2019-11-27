@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)='volverClick()'>
+          <ion-icon name="arrow-back"></ion-icon> 
+      </ion-button>
+      <ion-title>{{textosIdioma.titulo}}</ion-title>  
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="contacts"></ion-icon>
+      <ion-button fill='clear' (click)="usuariosClick()" >{{textosIdioma.usuarios}}</ion-button>
+    </ion-item>
+    <ion-item *ngIf= 'verAvanzadas'>
+      <ion-icon name="body"></ion-icon>
+      <ion-button fill='clear' (click)="adminClick()" >{{textosIdioma.administradores}}</ion-button>
+    </ion-item>
+    <ion-item *ngIf= 'verAvanzadas'>
+      <ion-icon name="person"></ion-icon>
+      <ion-button fill='clear' (click)="trabajadoresClick()" >{{textosIdioma.trabajadores}}</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="cafe"></ion-icon>
+      <ion-button fill='clear' (click)="clientesClick()" >{{textosIdioma.clientes}}</ion-button>
+    </ion-item>
+
+    <ion-item *ngIf= 'verAvanzadas'>
+      <ion-icon name="pricetag"></ion-icon>
+      <ion-button fill='clear' (click)="articulosClick()" >{{textosIdioma.articulos}}</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="basket"></ion-icon>
+      <ion-button fill='clear' (click)="pedidosClick()" >{{textosIdioma.pedidos}}</ion-button>
+    </ion-item>
+  </ion-list>
+  
+
+</ion-content>
+

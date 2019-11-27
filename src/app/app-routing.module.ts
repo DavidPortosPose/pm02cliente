@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'principal', loadChildren: './paginas/principal/principal.module#PrincipalPageModule' },
   { path: 'empresa-config', loadChildren: './paginas/empresa-config/empresa-config.module#EmpresaConfigPageModule' },
   { path: 'empresa-edit', loadChildren: './paginas/empresa-edit/empresa-edit.module#EmpresaEditPageModule' },
+  { path: 'empresa-gestion', loadChildren: './paginas/empresa-gestion/empresa-gestion.module#EmpresaGestionPageModule' },
 ];
 
 @NgModule({

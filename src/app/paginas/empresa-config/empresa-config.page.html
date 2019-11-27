@@ -4,7 +4,13 @@
       <ion-button (click)='volverClick()'>
           <ion-icon name="arrow-back"></ion-icon> 
       </ion-button>
-      <ion-title>{{textosIdioma.titulo}}<ion-badge *ngIf="!activo" color="danger">{{textosIdioma.noActivos}}</ion-badge></ion-title>  
+      <ion-title>
+        {{textosIdioma.titulo}}
+        <ion-badge *ngIf="!activo" color="danger" > 
+          {{textosIdioma.noActivos}}
+        </ion-badge>  
+      </ion-title>
+      
     </ion-buttons>
   </ion-toolbar>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
@@ -12,15 +18,15 @@
       <ion-icon name="menu"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="bottom">
-      <ion-fab-button *ngIf="!activo" (click)="empresaEditNuevoClick()">
+      <ion-fab-button (click)="empresaEditNuevoClick()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button *ngIf="activo" (click)="verActivosClick()">
+      <ion-fab-button *ngIf="!activo" (click)="verActivosClick()">
         <ion-icon name="eye"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="verActivosClick()">
-        <ion-icon name="eye-off"></ion-icon>
-      </ion-fab-button>
+      <ion-fab-button *ngIf="activo" (click)="verActivosClick()">
+          <ion-icon name="eye-off"></ion-icon>
+        </ion-fab-button>
       
     </ion-fab-list>    
   </ion-fab>

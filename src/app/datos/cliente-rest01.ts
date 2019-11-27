@@ -11,7 +11,8 @@ public tablaUsuario = {
     apellidos: 'APELLIDOS',
     mail : 'MAIL',
     clave: 'CLAVE',
-    activo: 'ACTIVO'
+    activo: 'ACTIVO',
+    superAdmin: 'SUPER_ADMIN'
 };
 
 public tablaSesion = {

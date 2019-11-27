@@ -1,9 +1,9 @@
 import { Params } from './../../lib/clases/params';
-export class EmpresaEditParams extends Params{
+export class EmpresaGestionParams extends Params{
 
     public parametrosEntrada = {
-        nuevo: true,
-        idEmpresa: ''
+        idEmpresa: '',
+        rol: null
     };
 
     public parametrosSalida = {
@@ -12,6 +12,6 @@ export class EmpresaEditParams extends Params{
     };
 
     constructor() {
-        super('/empresa-edit');
+        super('/empresa-gestion');
     }
 }

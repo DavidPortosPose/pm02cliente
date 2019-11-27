@@ -14,6 +14,13 @@ export enum Idioma {
   EN = 'EN'
 }
 
+export enum Rol {
+  ROL_SUPER_ADMIN = 'ROL_SUPER_ADMIN',
+  ROL_ADMIN = 'ROL_ADMIN',
+  ROL_TRABAJADOR = 'ROL_ADMIN',
+  ROL_NO_ROL = 'ROL_NO_ROL'
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +35,7 @@ export class DatosAppService {
   private urlRestService = 'http://127.0.0.1:8081';
   private rutaRestService = '/dual2/peticion2';
   public idSesion: string;
+  public rol: Rol;
   public tamanoAtributos = {
     nombreUsuario : 50,
     apellidos: 70,
@@ -44,6 +52,7 @@ export class DatosAppService {
     this.version = '1.0';
     this.idioma = Idioma.ES;
     this.idSesion = '';
+    this.rol = Rol.ROL_NO_ROL;
     this.pilaParams = new PilaParams(navCtrl);
     this.pilaParams.push(new HomeParams());
     this.util = new Util();
@@ -55,6 +64,7 @@ public abrirSesion(idSesion: string) {
 }
 public cerrarSesion() {
   this.idSesion = '';
+  this.rol = Rol.ROL_NO_ROL;
 }
 
 

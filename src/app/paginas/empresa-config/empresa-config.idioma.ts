@@ -8,6 +8,9 @@ export class EmpresaConfigIdioma {
     public activar: string;
     public desactivar: string;
     public noActivos: string;
+    public gestion: string;
+
+
 }
 
 export class EmpresaConfigIdiomaEs extends EmpresaConfigIdioma {
@@ -18,10 +21,11 @@ export class EmpresaConfigIdiomaEs extends EmpresaConfigIdioma {
         this.borrar = 'Borrar';
         this.cancelar = 'Cancelar';
         this.aceptar = 'Aceptar';
-        this.confirmeBorrado = 'Confirme Borrado';
+        this.confirmeBorrado = 'Confirmar';
         this.activar = 'Activar';
         this.desactivar = 'Desactivar';
         this.noActivos = 'No activos';
+        this.gestion = 'Gestión';
     }
 }
 
@@ -33,10 +37,12 @@ export class EmpresaConfigIdiomaGl extends EmpresaConfigIdioma {
         this.borrar = 'Borrar';
         this.cancelar = 'Cancelar';
         this.aceptar = 'Aceptar';
-        this.confirmeBorrado = 'Confirme Borrado';
+        this.confirmeBorrado = 'Confirmar';
         this.activar = 'Activar';
         this.desactivar = 'Desactivar';
-        this.noActivos = 'No activos';
+        this.noActivos = 'Non activos';
+        this.gestion = 'Xestión';
+
     }
 }
 
@@ -48,9 +54,10 @@ export class EmpresaConfigIdiomaEn extends EmpresaConfigIdioma {
         this.borrar = 'Delete';
         this.cancelar = 'Cancel';
         this.aceptar = 'Accept';
-        this.confirmeBorrado = 'Confirm delete';
+        this.confirmeBorrado = 'Confirm';
         this.activar = 'Enable';
         this.desactivar = 'Disable';
         this.noActivos = 'No actives';
+        this.gestion = 'Manage';
     }
 }

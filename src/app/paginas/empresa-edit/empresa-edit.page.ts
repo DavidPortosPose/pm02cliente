@@ -106,48 +106,6 @@ export class EmpresaEditPage implements OnInit {
 
   }
 
-  private restEmpresaDeleteCb2(){
-    if (this.clienteRest01.error) {
-      this.clienteRest01.mostrarMensajeError();
-    } else {
-      this.datosApp.mensaje.mostrarMensajeOk(this.textosIdioma.operacionOk);
-      this.empresaEditParams.parametrosSalida.ok = true;
-      this.datosApp.pilaParams.pop();
-    }
-  }
-  private restEmpresaDeleteCb(miPagina: object) {
-    const estaPagina: EmpresaEditPage = miPagina as EmpresaEditPage;
-    estaPagina.restEmpresaDeleteCb2();
-  }
-  private restEmpresaDelete() {
-    this.clienteRest01.setRetorno(this, this.restEmpresaDeleteCb);
-    this.clienteRest01.empresaDelete(
-      this.empresaEditParams.parametrosEntrada.idEmpresa);
-
-
-  }
-
-  private restEmpresacancelarCb2() {
-    if (this.clienteRest01.error) {
-      this.clienteRest01.mostrarMensajeError();
-    } else {
-      this.datosApp.mensaje.mostrarMensajeOk(this.textosIdioma.operacionOk);
-      this.empresaEditParams.parametrosSalida.ok = true;
-      this.datosApp.pilaParams.pop();
-    }
-  }
-  private restEmpresaCancelarCb(miPagina: object) {
-    const estaPagina: EmpresaEditPage = miPagina as EmpresaEditPage;
-    estaPagina.restEmpresaDeleteCb2();
-  }
-  private restEmpresaCancelar() {
-    this.clienteRest01.setRetorno(this, this.restEmpresaDeleteCb);
-    this.clienteRest01.empresaDelete(
-      this.empresaEditParams.parametrosEntrada.idEmpresa);
-
-
-  }
-
 
 
   public volverClick() {
@@ -156,15 +114,11 @@ export class EmpresaEditPage implements OnInit {
   }
 
   public aceptarClick(){
-    if (this.comprobarForm()) {
-        if (this.empresaEditParams.parametrosEntrada.nuevo) {
+    if (this.comprobarForm()){
+        if (this.empresaEditParams.parametrosEntrada.nuevo){
           this.restEmpresaInsert();
         } else {
          this.restEmpresaUpdate();
-
-        }
-        if (this.empresaEditParams.parametrosEntrada.idEmpresa) {
-          this.restEmpresaDelete();
         }
     }
   }
