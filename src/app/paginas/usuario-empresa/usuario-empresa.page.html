@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)='volverClick()'>
+          <ion-icon name="arrow-back"></ion-icon> 
+      </ion-button>
+      <ion-title>
+        {{textosIdioma.titulo}}
+        <ion-badge *ngIf="!activo" color="danger" > 
+          {{textosIdioma.noActivos}}
+        </ion-badge>  
+      </ion-title>
+      
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button size='small'>
+      <ion-icon name="menu"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="empresaEditNuevoClick()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="!activo" (click)="verActivosClick()">
+        <ion-icon name="eye"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="activo" (click)="verActivosClick()">
+          <ion-icon name="eye-off"></ion-icon>
+        </ion-fab-button>
+      
+    </ion-fab-list>    
+  </ion-fab>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of items" >
+        <ion-button fill='clear' (click)='usuarioEmpresaClick(item)'> 
+            {{item.NOMBRE}} 
+        </ion-button>        
+    </ion-item>
+  </ion-list>
+
+</ion-content>

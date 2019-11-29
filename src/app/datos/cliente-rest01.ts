@@ -30,6 +30,17 @@ public tablaEmpresa = {
     activo: 'ACTIVO'
 }
 
+public usuarioEmpresa = {
+    idUsuarioEmpresa: 'ID_USUARIO_EMPRESA',
+    idEmpresa: 'ID_EMPRESA',
+    nombre: 'NOMBRE',
+    apellidos: 'APELLIDOS',
+    nif: 'NIF',
+    activo: 'ACTIVO',
+    dir: 'DIR'
+
+};
+
 
 
 
@@ -45,13 +56,25 @@ private textosIdioma: ClienteRest01Idioma;
 public mostrarMensajeError(){
     switch (this.tipoError) {
         case 'EX_USUARIO_MAIL_EXISTE':
-            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_MAIL_EXISTE)
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_MAIL_EXISTE);
             break;
         case 'EX_USUARIO_LOGIN_ERROR':
-            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_LOGIN_ERROR)
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_LOGIN_ERROR);
             break;
         case 'EX_SUPER_ADMIN_ERROR':
-            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_SUPER_ADMIN_ERROR)
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_SUPER_ADMIN_ERROR);
+            break;
+        case 'EX_USUARIO_MAIL_NO_EXISTE':
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_MAIL_NO_EXISTE);
+            break;
+        case 'EX_ADMINISTRADOR_ERROR':
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_ADMINISTRADOR_ERROR);
+            break;
+        case 'EX_TRABAJADOR_ERROR':
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_TRABAJADOR_ERROR);
+            break;
+        case 'EX_ROL_ERROR':
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_ROL_ERROR);
             break;
     }
 }
@@ -162,6 +185,96 @@ public mostrarMensajeError(){
         };
         this.peticionRest(datosEnviar);
     }
+
+
+    public usuarioEmpresaSelect(idEmpresa: string, patron: string) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_USUARIO_EMPRESA_S',
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['idEmpresa'] : idEmpresa,
+                ['rol'] : this.datosApp.rol,
+                ['patron'] : patron
+                }
+        };
+        this.peticionRest(datosEnviar);
+    }
+    public usuarioEmpresaSelectId(idEmpresa: string, idUsuarioEmpresa: string) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_USUARIO_EMPRESA_S_ID',
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['idEmpresa'] : idEmpresa,
+                ['rol'] : this.datosApp.rol,
+                ['idUsuarioEmpresa'] : idUsuarioEmpresa
+                }
+        };
+        this.peticionRest(datosEnviar);
+
+    }
+
+    public usuarioEmpresaInsert(idEmpresa: string, mail: string, nombre: string,
+                                apellidos: string, nif: string, dir: string) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_USUARIO_EMPRESA_I',
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['rol'] : this.datosApp.rol,
+                ['idUsuarioEmpresa_generarId'] : '',
+                ['idEmpresa'] : idEmpresa,
+                ['mail'] : mail,
+                ['nombre'] : nombre,
+                ['apellidos'] : apellidos,
+                ['nif'] : nif,
+                ['dir'] : dir
+               } // Parámetros del JSON tienen que tener el mismo orden que los procedimientos almacenados.
+        };
+        this.peticionRest(datosEnviar);
+
+    }
+
+    public usuarioEmpresaUpdate(idUsuarioEmpresa: string, mail: string, nombre: string,
+                                apellidos: string, nif: string, dir: string) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_USUARIO_EMPRESA_U',
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['rol'] : this.datosApp.rol,
+                ['idUsuarioEmpresa'] : idUsuarioEmpresa,
+                ['nombre'] : nombre,
+                ['apellidos'] : apellidos,
+                ['nif'] : nif,
+                ['dir'] : dir
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+     public usuarioEmpresaUpdateActivo(idUsuarioEmpresa: string, activo: boolean) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_USUARIO_EMPRESA_U_ACTIVO',
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['rol'] : this.datosApp.rol,
+                ['idUsuarioEmpresa'] : idUsuarioEmpresa,
+                ['activo'] : this.datosApp.util.booleanToString(activo)
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public usuarioEmpresaDelete(idUsuarioEmpresa: string) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_USUARIO_EMPRESA_D',
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['rol'] : this.datosApp.rol,
+                ['idUsuarioEmpresa'] : idUsuarioEmpresa,
+               }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
 
 
 }
