@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'empresa-edit', loadChildren: './paginas/empresa-edit/empresa-edit.module#EmpresaEditPageModule' },
   { path: 'empresa-gestion', loadChildren: './paginas/empresa-gestion/empresa-gestion.module#EmpresaGestionPageModule' },
   { path: 'usuario-empresa', loadChildren: './paginas/usuario-empresa/usuario-empresa.module#UsuarioEmpresaPageModule' },
+  { path: 'usuario-empresa-edit', loadChildren: './paginas/usuario-empresa-edit/usuario-empresa-edit.module#UsuarioEmpresaEditPageModule' },
 ];
 
 @NgModule({

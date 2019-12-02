@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)='volverClick()'>
+          <ion-icon name="arrow-back"></ion-icon> 
+      </ion-button>
+      <ion-title>{{textosIdioma.titulo}}</ion-title>  
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item>
+          <ion-label position='floating'>{{textosIdioma.mail}}</ion-label>
+          <ion-input [(ngModel)]='form.mail'></ion-input>
+        </ion-item>
+      <ion-item>
+        <ion-label position='floating'>{{textosIdioma.nombre}}</ion-label>
+        <ion-input [(ngModel)]='form.nombre'></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position='floating'>{{textosIdioma.apellidos}}</ion-label>
+          <ion-input [(ngModel)]='form.apellidos'></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label position='floating'>{{textosIdioma.nif}}</ion-label>
+            <ion-input [(ngModel)]='form.nif'></ion-input>
+      </ion-item>
+      <ion-item>
+              <ion-label position='floating'>{{textosIdioma.dir}}</ion-label>
+              <ion-input [(ngModel)]='form.dir'></ion-input>
+      </ion-item>
+  </ion-list>
+  <ion-button shape='round' fill='outline' 
+      (click)='aceptarClick()'>
+      {{textosIdioma.aceptar}}
+  </ion-button>
+
+</ion-content>
+

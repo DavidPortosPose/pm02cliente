@@ -30,7 +30,7 @@ public tablaEmpresa = {
     activo: 'ACTIVO'
 }
 
-public usuarioEmpresa = {
+public tablaUsuarioEmpresa = {
     idUsuarioEmpresa: 'ID_USUARIO_EMPRESA',
     idEmpresa: 'ID_EMPRESA',
     nombre: 'NOMBRE',
@@ -233,7 +233,7 @@ public mostrarMensajeError(){
 
     }
 
-    public usuarioEmpresaUpdate(idUsuarioEmpresa: string, mail: string, nombre: string,
+    public usuarioEmpresaUpdate(idUsuarioEmpresa: string, nombre: string,
                                 apellidos: string, nif: string, dir: string) {
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_U',
