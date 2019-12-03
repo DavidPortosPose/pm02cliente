@@ -180,21 +180,22 @@ public mostrarMensajeError(){
             params: {
                 ['idSesion'] : this.datosApp.idSesion,
                 ['idEmpresa'] : idEmpresa,
-                ['activo'] : this.datosApp.util.booleanToString(activo),
+                ['activo'] : this.datosApp.util.booleanToString(activo)
             }
         };
         this.peticionRest(datosEnviar);
     }
 
 
-    public usuarioEmpresaSelect(idEmpresa: string, patron: string) {
+    public usuarioEmpresaSelect(idEmpresa: string, patron: string, activo: boolean) {
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_S',
             params: {
                 ['idSesion'] : this.datosApp.idSesion,
                 ['idEmpresa'] : idEmpresa,
                 ['rol'] : this.datosApp.rol,
-                ['patron'] : patron
+                ['patron'] : patron,
+                ['activo'] : this.datosApp.util.booleanToString(activo)
                 }
         };
         this.peticionRest(datosEnviar);

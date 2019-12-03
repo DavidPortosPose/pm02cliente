@@ -8,6 +8,7 @@ export class UsuarioEmpresaIdioma {
     public activar: string;
     public desactivar: string;
     public noActivos: string;
+    public apellidosABuscar: string;
 
 
 
@@ -25,6 +26,7 @@ export class UsuarioEmpresaIdiomaEs extends UsuarioEmpresaIdioma {
         this.activar = 'Activar';
         this.desactivar = 'Desactivar';
         this.noActivos = 'No activos';
+        this.apellidosABuscar = 'Apellidos a buscar';
 
     }
 }
@@ -41,6 +43,7 @@ export class UsuarioEmpresaIdiomaGl extends UsuarioEmpresaIdioma {
         this.activar = 'Activar';
         this.desactivar = 'Desactivar';
         this.noActivos = 'Non activos';
+        this.apellidosABuscar = 'Apelidos a buscar';
 
 
     }
@@ -58,6 +61,7 @@ export class UsuarioEmpresaIdiomaEn extends UsuarioEmpresaIdioma {
         this.activar = 'Enable';
         this.desactivar = 'Disable';
         this.noActivos = 'No actives';
+        this.apellidosABuscar = 'Last name to search';
 
     }
 }

@@ -14,7 +14,7 @@
     </ion-buttons>
     <ion-searchbar debounce="500"  placeholder={{textosIdioma.apellidosBuscar}}
     [(ngModel)]= 'patronBuscar'
-    (change)='buscarItems()'> </ion-searchbar>
+    (ionChange)='buscarItems()'> </ion-searchbar>
   
   </ion-toolbar>
   <ion-fab vertical="top" horizontal="end" slot="fixed">

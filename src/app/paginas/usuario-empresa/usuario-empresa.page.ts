@@ -1,9 +1,10 @@
-import { DatosAppService } from './../../datos/datos-app.service';
+import { DatosAppService, Idioma } from './../../datos/datos-app.service';
 import { ClienteRest01 } from './../../datos/cliente-rest01';
 import { UsuarioEmpresaParams } from './usuario-empresa.params';
-import { UsuarioEmpresaIdioma } from './usuario-empresa.idioma';
+import { UsuarioEmpresaIdioma, UsuarioEmpresaIdiomaEn, UsuarioEmpresaIdiomaGl, UsuarioEmpresaIdiomaEs } from './usuario-empresa.idioma';
 import { EmpresaConfigIdioma } from './../empresa-config/empresa-config.idioma';
 import { Component, OnInit } from '@angular/core';
+import { UsuarioEmpresaEditParams } from '../usuario-empresa-edit/usuario-empresa-edit-params';
 
 @Component({
   selector: 'app-usuario-empresa',
@@ -13,21 +14,20 @@ import { Component, OnInit } from '@angular/core';
 export class UsuarioEmpresaPage implements OnInit {
   public textosIdioma: UsuarioEmpresaIdioma;
   private usuarioEmpresaParams: UsuarioEmpresaParams;
-  // private empresaEditParams: EmpresaEditParams;
+  private usuarioEmpresaEditParams: UsuarioEmpresaEditParams;
   
   // private empresaGestionParams: EmpresaGestionParams;
 
   public items = [];
   private clienteRest01: ClienteRest01;
   public activo = true;
-  usuarioEmpresaEditParams: any;
+  public patronBuscar = '';
 
   constructor(private datosApp: DatosAppService) { 
     this.setIdioma();
     this.usuarioEmpresaParams = datosApp.pilaParams.getTop() as UsuarioEmpresaParams;
-    // this.empresaEditParams = null;
     this.clienteRest01 = new ClienteRest01(datosApp);
-    this.restEmpresaSelect();
+    
   }
 
   ngOnInit() {
@@ -38,97 +38,91 @@ export class UsuarioEmpresaPage implements OnInit {
     ((this.usuarioEmpresaEditParams.parametrosSalida.ok) ||
     (this.usuarioEmpresaEditParams.parametrosSalida.cancelar))) {
       /* Realizar acciones*/
-      if (this.empresaEditParams.parametrosSalida.ok) {
-        this.restEmpresaSelect();
+      if (this.usuarioEmpresaEditParams.parametrosSalida.ok) {
+        this.restUsuarioEmpresaSelect();
       }
-      this.empresaEditParams = null;
+      this.usuarioEmpresaEditParams = null;
     }
 
-    if ((this.empresaGestionParams !== null) &&
-    ((this.empresaGestionParams.parametrosSalida.ok) ||
-    (this.empresaGestionParams.parametrosSalida.cancelar))) {
-      /* Realizar acciones*/
-
-      this.empresaGestionParams = null;
     }
-
-  }
 
   private setIdioma() {
     switch (this.datosApp.idioma) {
-      case Idioma.EN: this.textosIdioma = new EmpresaConfigIdiomaEn();
+      case Idioma.EN: this.textosIdioma = new UsuarioEmpresaIdiomaEn();
                       break;
-      case Idioma.GL: this.textosIdioma = new EmpresaConfigIdiomaGl();
+      case Idioma.GL: this.textosIdioma = new UsuarioEmpresaIdiomaGl();
                       break;
-      default: this.textosIdioma = new EmpresaConfigIdiomaEs();
+      default: this.textosIdioma = new UsuarioEmpresaIdiomaEs();
     }
   }
 
-  private restEmpresaSelectCb2(){
+  private restUsuarioEmpresaSelectCb2(){
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
         this.items = this.clienteRest01.rows;
     }
   }
-  private restEmpresaSelectCb(miPagina: object){
-    const estaPagina: EmpresaConfigPage = miPagina as EmpresaConfigPage;
-    estaPagina.restEmpresaSelectCb2();
+  private restUsuarioEmpresaSelectCb(miPagina: object){
+    const estaPagina: UsuarioEmpresaPage = miPagina as UsuarioEmpresaPage;
+    estaPagina.restUsuarioEmpresaSelectCb2();
   }
-  private restEmpresaSelect(){
-    this.clienteRest01.setRetorno(this, this.restEmpresaSelectCb);
-    this.clienteRest01.empresaSelect(this.activo);
+  private restUsuarioEmpresaSelect(){
+    this.clienteRest01.setRetorno(this, this.restUsuarioEmpresaSelectCb);
+    this.clienteRest01.usuarioEmpresaSelect(this.usuarioEmpresaParams.parametrosEntrada.idEmpresa, this.patronBuscar, this.activo);
   }
 
-  private restEmpresaDeleteCb2(){
+  private restUsuarioEmpresaDeleteCb2(){
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
-       this.restEmpresaSelect();
+       this.restUsuarioEmpresaSelect(); // Llamar al Select para borrar los seleccionados.
     }
   }
-  private restEmpresaDeleteCb(miPagina: object){
-    const estaPagina: EmpresaConfigPage = miPagina as EmpresaConfigPage;
-    estaPagina.restEmpresaDeleteCb2();
+  private restUsuarioEmpresaDeleteCb(miPagina: object){
+    const estaPagina: UsuarioEmpresaPage = miPagina as UsuarioEmpresaPage;
+    estaPagina.restUsuarioEmpresaDeleteCb2();
   }
-  private restEmpresaDelete(idEmpresa){
-    this.clienteRest01.setRetorno(this, this.restEmpresaDeleteCb);
-    this.clienteRest01.empresaDelete(idEmpresa);
+  private restUsuarioEmpresaDelete(idUsuarioEmpresa){
+    this.clienteRest01.setRetorno(this, this.restUsuarioEmpresaDeleteCb);
+    this.clienteRest01.usuarioEmpresaDelete(idUsuarioEmpresa);
   }
 
-  private restEmpresaUpdateActivoCb2(){
+  private restUsuarioEmpresaUpdateActivoCb2(){
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
-       this.restEmpresaSelect();
+       this.restUsuarioEmpresaSelect();
     }
   }
-  private restEmpresaUpdateActivoCb(miPagina: object){
-    const estaPagina: EmpresaConfigPage = miPagina as EmpresaConfigPage;
-    estaPagina.restEmpresaUpdateActivoCb2();
+  private restUsuarioEmpresaUpdateActivoCb(miPagina: object){
+    const estaPagina: UsuarioEmpresaPage = miPagina as UsuarioEmpresaPage;
+    estaPagina.restUsuarioEmpresaUpdateActivoCb2();
   }
-  private restEmpresaUpdateActivo(idEmpresa: string, activo: boolean){
-    this.clienteRest01.setRetorno(this, this.restEmpresaUpdateActivoCb);
-    this.clienteRest01.empresaUpdateActivo(idEmpresa, activo);
+  private restUsuarioEmpresaUpdateActivo(idUsuarioEmpresa: string, activo: boolean){
+    this.clienteRest01.setRetorno(this, this.restUsuarioEmpresaUpdateActivoCb);
+    this.clienteRest01.usuarioEmpresaUpdateActivo(idUsuarioEmpresa, activo);
   }
 
   public volverClick() {
-    this.empresaConfigParams.parametrosSalida.cancelar = true;
+    this.usuarioEmpresaParams.parametrosSalida.cancelar = true;
     this.datosApp.pilaParams.pop();
   }
 
   public empresaEditNuevoClick(){
-    this.empresaEditParams = new EmpresaEditParams();
-    this.empresaEditParams.parametrosEntrada.nuevo = true;
-    this.datosApp.pilaParams.push(this.empresaEditParams);
+    this.usuarioEmpresaEditParams = new UsuarioEmpresaEditParams();
+    this.usuarioEmpresaEditParams.parametrosEntrada.nuevo = true;
+    this.usuarioEmpresaEditParams.parametrosEntrada.idEmpresa =
+    this.usuarioEmpresaEditParams.parametrosEntrada.idEmpresa;
+    this.datosApp.pilaParams.push(this.usuarioEmpresaEditParams);
 }
 
 public verActivosClick(){
   this.activo = ! this.activo;
-  this.restEmpresaSelect();
+  this.restUsuarioEmpresaSelect();
 }
 
-async confirmarDelete(item) {
+async confirmarDelete(item) { // asincrono. Ventana confirmacion, cuando se ejecute no para todo el codigo, solo espera a que se active el evento, pero el codigo sigue funcionando. Proceso por detras sigue en funcionamiento.
   const alert = await this.datosApp.alertController.create({
     header: this.textosIdioma.confirmeBorrado,
     message: item[this.clienteRest01.tablaEmpresa.nombre],
@@ -142,7 +136,7 @@ async confirmarDelete(item) {
       }, {
         text: this.textosIdioma.aceptar,
         handler: () => {
-          this.restEmpresaDelete(item[this.clienteRest01.tablaEmpresa.idEmpresa]);
+          this.restUsuarioEmpresaDelete(item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa]);
         }
       }
     ]
@@ -151,27 +145,21 @@ async confirmarDelete(item) {
   await alert.present();
 }
 
-async empresaClick(item) {
-  const activo = this.datosApp.util.stringToBoolean(item[this.clienteRest01.tablaEmpresa.activo]);
+async usuarioEmpresaClick(item) {
+  const activo = this.datosApp.util.stringToBoolean(item[this.clienteRest01.tablaUsuarioEmpresa.activo]);
   const actionSheet = await this.datosApp.actionSheetController.create({
-    header: item[this.clienteRest01.tablaEmpresa.nombre],
+    header: item[this.clienteRest01.tablaUsuarioEmpresa.nombre] + ' ' + item[this.clienteRest01.tablaUsuarioEmpresa.apellidos],
     buttons: [{
-      text: this.textosIdioma.gestion,
-      icon: 'build',
-      handler: () => {
-        this.empresaGestionParams = new EmpresaGestionParams();
-        this.empresaGestionParams.parametrosEntrada.idEmpresa = item[this.clienteRest01.tablaEmpresa.idEmpresa];
-        this.datosApp.pilaParams.push(this.empresaGestionParams);
-      }
-    }, { 
       text: this.textosIdioma.editar,
       icon: 'create',
       handler: () => {
-        this.empresaEditParams = new EmpresaEditParams();
-        this.empresaEditParams.parametrosEntrada.nuevo = false;
-        this.empresaEditParams.parametrosEntrada.idEmpresa = item[this.clienteRest01.tablaEmpresa.idEmpresa]; 
-        this.datosApp.pilaParams.push(this.empresaEditParams);
+        this.usuarioEmpresaEditParams = new UsuarioEmpresaEditParams();
+        this.usuarioEmpresaEditParams.parametrosEntrada.nuevo = false;
+        this.usuarioEmpresaParams.parametrosEntrada.idEmpresa = item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa];
+        this.datosApp.pilaParams.push(this.usuarioEmpresaEditParams);
       }
+    }, { 
+     
     }, {
       text: this.textosIdioma.borrar,
       icon: 'trash',
@@ -183,9 +171,9 @@ async empresaClick(item) {
         text: activo ? this.textosIdioma.desactivar : this.textosIdioma.activar,
         icon: activo ? 'eye-off' : 'eye',
         handler: () => {
-          const idEmpresa = item[this.clienteRest01.tablaEmpresa.idEmpresa];
+          const idUsuarioEmpresa = item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa];
   
-          this.restEmpresaUpdateActivo(idEmpresa, ! activo);
+          this.restUsuarioEmpresaUpdateActivo(idUsuarioEmpresa, ! activo);
         }
       }, {
         text: this.textosIdioma.cancelar,
@@ -197,6 +185,14 @@ async empresaClick(item) {
     }]
   });
   await actionSheet.present();
+}
+
+public buscarItems() {
+  if(this.patronBuscar === '') {
+    this.items = [];
+  } else {
+    this.restUsuarioEmpresaSelect();
+  }
 }
 
 

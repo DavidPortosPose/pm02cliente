@@ -2,6 +2,7 @@ import { Params } from './../../lib/clases/params';
 export class UsuarioEmpresaParams extends Params {
 
     public parametrosEntrada = {
+        idEmpresa: ''
 
     };
 
