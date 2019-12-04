@@ -10,12 +10,12 @@
           {{textosIdioma.noActivos}}
         </ion-badge>  
       </ion-title>
-      
     </ion-buttons>
-    <ion-searchbar debounce="500"  placeholder={{textosIdioma.apellidosBuscar}}
-    [(ngModel)]= 'patronBuscar'
-    (ionChange)='buscarItems()'> </ion-searchbar>
-  
+    <ion-searchbar debounce="500" 
+    placeholder='{{textosIdioma.apellidosBuscar}}' 
+    [(ngModel)]='patronBuscar'
+    (ionChange)='buscarItems()' 
+    ></ion-searchbar>
   </ion-toolbar>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button size='small'>
@@ -37,11 +37,13 @@
 </ion-header>
 
 <ion-content>
+    <ion-spinner *ngIf='buscando' name="bubbles"></ion-spinner>       
   <ion-list>
     <ion-item *ngFor="let item of items" >
         <ion-button fill='clear' (click)='usuarioEmpresaClick(item)'> 
-            {{item.NOMBRE}} 
-        </ion-button>        
+            {{item.NOMBRE}} &nbsp; {{item.APELLIDOS}}
+        </ion-button>
+        
     </ion-item>
   </ion-list>
 

@@ -2,7 +2,6 @@ import { ClienteRest01Idioma, ClienteRest01IdiomaEn, ClienteRest01IdiomaGl, Clie
 import { DatosAppService, Idioma } from './datos-app.service';
 import { DatosEnviar } from '../lib/clases/http';
 import { ClienteRest } from '../lib/clases/cliente-rest';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export class ClienteRest01 extends ClienteRest {
 public tablaUsuario = {
@@ -29,17 +28,18 @@ public tablaEmpresa = {
     nombre: 'NOMBRE',
     activo: 'ACTIVO'
 }
-
 public tablaUsuarioEmpresa = {
     idUsuarioEmpresa: 'ID_USUARIO_EMPRESA',
     idEmpresa: 'ID_EMPRESA',
+    idUsuario: 'ID_USUARIO',
     nombre: 'NOMBRE',
     apellidos: 'APELLIDOS',
     nif: 'NIF',
     activo: 'ACTIVO',
     dir: 'DIR'
+}
 
-};
+
 
 
 
@@ -56,7 +56,7 @@ private textosIdioma: ClienteRest01Idioma;
 public mostrarMensajeError(){
     switch (this.tipoError) {
         case 'EX_USUARIO_MAIL_EXISTE':
-            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_MAIL_EXISTE);
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_MAIL_EXISTE)
             break;
         case 'EX_USUARIO_LOGIN_ERROR':
             this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_LOGIN_ERROR);
@@ -64,8 +64,8 @@ public mostrarMensajeError(){
         case 'EX_SUPER_ADMIN_ERROR':
             this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_SUPER_ADMIN_ERROR);
             break;
-        case 'EX_USUARIO_MAIL_NO_EXISTE':
-            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_MAIL_NO_EXISTE);
+        case 'EX_USUARIO_MAIL_EXISTE':
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_USUARIO_MAIL_EXISTE);
             break;
         case 'EX_ADMINISTRADOR_ERROR':
             this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_ADMINISTRADOR_ERROR);
@@ -180,14 +180,16 @@ public mostrarMensajeError(){
             params: {
                 ['idSesion'] : this.datosApp.idSesion,
                 ['idEmpresa'] : idEmpresa,
-                ['activo'] : this.datosApp.util.booleanToString(activo)
+                ['activo'] : this.datosApp.util.booleanToString(activo),
             }
         };
         this.peticionRest(datosEnviar);
     }
 
+   
 
-    public usuarioEmpresaSelect(idEmpresa: string, patron: string, activo: boolean) {
+    public usuarioEmpresaSelect(idEmpresa: string, patron: string,
+                                activo: boolean){
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_S',
             params: {
@@ -196,26 +198,26 @@ public mostrarMensajeError(){
                 ['rol'] : this.datosApp.rol,
                 ['patron'] : patron,
                 ['activo'] : this.datosApp.util.booleanToString(activo)
-                }
+            }
         };
         this.peticionRest(datosEnviar);
     }
-    public usuarioEmpresaSelectId(idEmpresa: string, idUsuarioEmpresa: string) {
+
+    public usuarioEmpresaSelectId(idUsuarioEmpresa: string){
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_S_ID',
             params: {
                 ['idSesion'] : this.datosApp.idSesion,
-                ['idEmpresa'] : idEmpresa,
                 ['rol'] : this.datosApp.rol,
-                ['idUsuarioEmpresa'] : idUsuarioEmpresa
-                }
+                ['idUsuarioEmpresa'] : idUsuarioEmpresa,
+            }
         };
         this.peticionRest(datosEnviar);
-
     }
 
-    public usuarioEmpresaInsert(idEmpresa: string, mail: string, nombre: string,
-                                apellidos: string, nif: string, dir: string) {
+    public usuarioEmpresaInsert(idEmpresa: string,
+                                mail: string, nombre: string, apellidos: string,
+                                nif: string, dir: string ){
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_I',
             params: {
@@ -228,14 +230,14 @@ public mostrarMensajeError(){
                 ['apellidos'] : apellidos,
                 ['nif'] : nif,
                 ['dir'] : dir
-               } // Parámetros del JSON tienen que tener el mismo orden que los procedimientos almacenados.
+
+            }
         };
         this.peticionRest(datosEnviar);
-
     }
 
-    public usuarioEmpresaUpdate(idUsuarioEmpresa: string, nombre: string,
-                                apellidos: string, nif: string, dir: string) {
+    public usuarioEmpresaUpdate(idUsuarioEmpresa: string, nombre: string, apellidos: string,
+                                nif: string, dir: string ){
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_U',
             params: {
@@ -251,31 +253,29 @@ public mostrarMensajeError(){
         this.peticionRest(datosEnviar);
     }
 
-     public usuarioEmpresaUpdateActivo(idUsuarioEmpresa: string, activo: boolean) {
+    public usuarioEmpresaUpdateActivo(idUsuarioEmpresa: string, activo: boolean ){
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_U_ACTIVO',
             params: {
                 ['idSesion'] : this.datosApp.idSesion,
                 ['rol'] : this.datosApp.rol,
                 ['idUsuarioEmpresa'] : idUsuarioEmpresa,
-                ['activo'] : this.datosApp.util.booleanToString(activo)
+                ['activo'] : this.datosApp.util.booleanToString(activo),
             }
         };
         this.peticionRest(datosEnviar);
     }
 
-    public usuarioEmpresaDelete(idUsuarioEmpresa: string) {
+    public usuarioEmpresaDelete(idUsuarioEmpresa: string ){
         const datosEnviar: DatosEnviar = {
             operacion: 'PUB_USUARIO_EMPRESA_D',
             params: {
                 ['idSesion'] : this.datosApp.idSesion,
                 ['rol'] : this.datosApp.rol,
-                ['idUsuarioEmpresa'] : idUsuarioEmpresa,
-               }
+                ['idUsuarioEmpresa'] : idUsuarioEmpresa
+            }
         };
         this.peticionRest(datosEnviar);
     }
-
-
 
 }

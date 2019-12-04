@@ -12,9 +12,9 @@
 
 <ion-content>
   <ion-list>
-      <ion-item>
-          <ion-label position='floating'>{{textosIdioma.mail}}</ion-label>
-          <ion-input [(ngModel)]='form.mail'></ion-input>
+      <ion-item *ngIf='nuevo'>
+          <ion-label  position='floating'>{{textosIdioma.mail}}</ion-label>
+          <ion-input type='mail' [(ngModel)]='form.mail'></ion-input>
         </ion-item>
       <ion-item>
         <ion-label position='floating'>{{textosIdioma.nombre}}</ion-label>
@@ -23,15 +23,16 @@
       <ion-item>
           <ion-label position='floating'>{{textosIdioma.apellidos}}</ion-label>
           <ion-input [(ngModel)]='form.apellidos'></ion-input>
-      </ion-item>
-      <ion-item>
+        </ion-item>
+        <ion-item>
             <ion-label position='floating'>{{textosIdioma.nif}}</ion-label>
             <ion-input [(ngModel)]='form.nif'></ion-input>
-      </ion-item>
-      <ion-item>
-              <ion-label position='floating'>{{textosIdioma.dir}}</ion-label>
-              <ion-input [(ngModel)]='form.dir'></ion-input>
-      </ion-item>
+        </ion-item> 
+        <ion-item>
+            <ion-label position='floating'>{{textosIdioma.dir}}</ion-label>
+            <ion-input [(ngModel)]='form.dir'></ion-input>
+          </ion-item>
+
   </ion-list>
   <ion-button shape='round' fill='outline' 
       (click)='aceptarClick()'>
@@ -39,4 +40,5 @@
   </ion-button>
 
 </ion-content>
+
 

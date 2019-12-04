@@ -1,10 +1,9 @@
+import { UsuarioEmpresaEditParams } from './../usuario-empresa-edit/usuario-empresa-edit.params';
 import { DatosAppService, Idioma } from './../../datos/datos-app.service';
 import { ClienteRest01 } from './../../datos/cliente-rest01';
 import { UsuarioEmpresaParams } from './usuario-empresa.params';
 import { UsuarioEmpresaIdioma, UsuarioEmpresaIdiomaEn, UsuarioEmpresaIdiomaGl, UsuarioEmpresaIdiomaEs } from './usuario-empresa.idioma';
-import { EmpresaConfigIdioma } from './../empresa-config/empresa-config.idioma';
 import { Component, OnInit } from '@angular/core';
-import { UsuarioEmpresaEditParams } from '../usuario-empresa-edit/usuario-empresa-edit-params';
 
 @Component({
   selector: 'app-usuario-empresa',
@@ -15,19 +14,20 @@ export class UsuarioEmpresaPage implements OnInit {
   public textosIdioma: UsuarioEmpresaIdioma;
   private usuarioEmpresaParams: UsuarioEmpresaParams;
   private usuarioEmpresaEditParams: UsuarioEmpresaEditParams;
-  
-  // private empresaGestionParams: EmpresaGestionParams;
+
+
 
   public items = [];
   private clienteRest01: ClienteRest01;
   public activo = true;
   public patronBuscar = '';
+  public buscando = false;
 
   constructor(private datosApp: DatosAppService) { 
     this.setIdioma();
     this.usuarioEmpresaParams = datosApp.pilaParams.getTop() as UsuarioEmpresaParams;
+    this.usuarioEmpresaEditParams = null;
     this.clienteRest01 = new ClienteRest01(datosApp);
-    
   }
 
   ngOnInit() {
@@ -39,12 +39,14 @@ export class UsuarioEmpresaPage implements OnInit {
     (this.usuarioEmpresaEditParams.parametrosSalida.cancelar))) {
       /* Realizar acciones*/
       if (this.usuarioEmpresaEditParams.parametrosSalida.ok) {
-        this.restUsuarioEmpresaSelect();
+        this.buscarItems();
       }
       this.usuarioEmpresaEditParams = null;
     }
 
-    }
+    
+
+  }
 
   private setIdioma() {
     switch (this.datosApp.idioma) {
@@ -57,6 +59,7 @@ export class UsuarioEmpresaPage implements OnInit {
   }
 
   private restUsuarioEmpresaSelectCb2(){
+    this.buscando = false;
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
@@ -68,15 +71,22 @@ export class UsuarioEmpresaPage implements OnInit {
     estaPagina.restUsuarioEmpresaSelectCb2();
   }
   private restUsuarioEmpresaSelect(){
+    this.buscando = true;
     this.clienteRest01.setRetorno(this, this.restUsuarioEmpresaSelectCb);
-    this.clienteRest01.usuarioEmpresaSelect(this.usuarioEmpresaParams.parametrosEntrada.idEmpresa, this.patronBuscar, this.activo);
+    this.clienteRest01.usuarioEmpresaSelect(
+        this.usuarioEmpresaParams.parametrosEntrada.idEmpresa,
+        this.patronBuscar, this.activo);
+    
+      
+    
+    
   }
 
   private restUsuarioEmpresaDeleteCb2(){
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
-       this.restUsuarioEmpresaSelect(); // Llamar al Select para borrar los seleccionados.
+       this.buscarItems();
     }
   }
   private restUsuarioEmpresaDeleteCb(miPagina: object){
@@ -92,7 +102,7 @@ export class UsuarioEmpresaPage implements OnInit {
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
-       this.restUsuarioEmpresaSelect();
+       this.buscarItems();
     }
   }
   private restUsuarioEmpresaUpdateActivoCb(miPagina: object){
@@ -113,16 +123,16 @@ export class UsuarioEmpresaPage implements OnInit {
     this.usuarioEmpresaEditParams = new UsuarioEmpresaEditParams();
     this.usuarioEmpresaEditParams.parametrosEntrada.nuevo = true;
     this.usuarioEmpresaEditParams.parametrosEntrada.idEmpresa =
-    this.usuarioEmpresaEditParams.parametrosEntrada.idEmpresa;
+    this.usuarioEmpresaParams.parametrosEntrada.idEmpresa;
     this.datosApp.pilaParams.push(this.usuarioEmpresaEditParams);
 }
 
 public verActivosClick(){
   this.activo = ! this.activo;
-  this.restUsuarioEmpresaSelect();
+  this.buscarItems();
 }
 
-async confirmarDelete(item) { // asincrono. Ventana confirmacion, cuando se ejecute no para todo el codigo, solo espera a que se active el evento, pero el codigo sigue funcionando. Proceso por detras sigue en funcionamiento.
+async confirmarDelete(item) {
   const alert = await this.datosApp.alertController.create({
     header: this.textosIdioma.confirmeBorrado,
     message: item[this.clienteRest01.tablaEmpresa.nombre],
@@ -148,18 +158,18 @@ async confirmarDelete(item) { // asincrono. Ventana confirmacion, cuando se ejec
 async usuarioEmpresaClick(item) {
   const activo = this.datosApp.util.stringToBoolean(item[this.clienteRest01.tablaUsuarioEmpresa.activo]);
   const actionSheet = await this.datosApp.actionSheetController.create({
-    header: item[this.clienteRest01.tablaUsuarioEmpresa.nombre] + ' ' + item[this.clienteRest01.tablaUsuarioEmpresa.apellidos],
-    buttons: [{
+    header: item[this.clienteRest01.tablaUsuarioEmpresa.nombre] + ' ' +
+            item[this.clienteRest01.tablaUsuarioEmpresa.apellidos],
+    buttons: [{ 
       text: this.textosIdioma.editar,
       icon: 'create',
       handler: () => {
         this.usuarioEmpresaEditParams = new UsuarioEmpresaEditParams();
         this.usuarioEmpresaEditParams.parametrosEntrada.nuevo = false;
-        this.usuarioEmpresaParams.parametrosEntrada.idEmpresa = item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa];
+        this.usuarioEmpresaEditParams.parametrosEntrada.idUsuarioEmpresa = 
+          item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa];
         this.datosApp.pilaParams.push(this.usuarioEmpresaEditParams);
       }
-    }, { 
-     
     }, {
       text: this.textosIdioma.borrar,
       icon: 'trash',
@@ -187,8 +197,8 @@ async usuarioEmpresaClick(item) {
   await actionSheet.present();
 }
 
-public buscarItems() {
-  if(this.patronBuscar === '') {
+public buscarItems(){
+  if (this.patronBuscar === ''){
     this.items = [];
   } else {
     this.restUsuarioEmpresaSelect();

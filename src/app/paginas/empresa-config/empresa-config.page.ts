@@ -25,6 +25,7 @@ export class EmpresaConfigPage implements OnInit {
     this.setIdioma();
     this.empresaConfigParams = datosApp.pilaParams.getTop() as EmpresaConfigParams;
     this.empresaEditParams = null;
+    this.empresaGestionParams = null;
     
     this.clienteRest01 = new ClienteRest01(datosApp);
     this.restEmpresaSelect();
