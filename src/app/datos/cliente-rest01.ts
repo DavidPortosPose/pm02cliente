@@ -27,7 +27,7 @@ public tablaEmpresa = {
     idEmpresa: 'ID_EMPRESA',
     nombre: 'NOMBRE',
     activo: 'ACTIVO'
-}
+};
 public tablaUsuarioEmpresa = {
     idUsuarioEmpresa: 'ID_USUARIO_EMPRESA',
     idEmpresa: 'ID_EMPRESA',
@@ -37,7 +37,19 @@ public tablaUsuarioEmpresa = {
     nif: 'NIF',
     activo: 'ACTIVO',
     dir: 'DIR'
-}
+};
+
+public tablaAdministrador = {
+    idAdministrador: 'ID_ADMINISTRADOR',
+    idUsuarioEmpresa: 'ID_USUARIO_EMPRESA',
+    idUsuario: 'ID_USUARIO',
+    nombre: 'NOMBRE',
+    apellidos: 'APELLIDOS',
+    nif: 'NIF',
+    activo: 'ACTIVO',
+    dir: 'DIR'
+};
+
 
 
 
@@ -277,5 +289,57 @@ public mostrarMensajeError(){
         };
         this.peticionRest(datosEnviar);
     }
+
+    public administradorSelect(idEmpresa: string,
+        activo: boolean){
+            const datosEnviar: DatosEnviar = {
+                operacion: 'PUB_ADMINISTRADOR_S',   
+                params: {
+                    ['idSesion'] : this.datosApp.idSesion,
+                    ['idEmpresa'] : idEmpresa,
+                    ['activo'] : this.datosApp.util.booleanToString(activo)
+                }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public administradorInsert(idUsuarioEmpresa: string) {
+            const datosEnviar: DatosEnviar = {
+                operacion: 'PUB_ADMINISTRADOR_I',   
+                params: {
+                    ['idSesion'] : this.datosApp.idSesion,
+                    ['idAdministrador_generarId'] : '',
+                    ['idUsuarioEmpresa'] : idUsuarioEmpresa
+                }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public administradorUpdateActivo(idAdministrador: string, activo: boolean) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ADMINISTRADOR_U_ACTIVO',   
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['idAdministrador'] : idAdministrador,
+                ['activo'] : this.datosApp.util.booleanToString(activo)
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public administradorDelete(idAdministrador: string) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ADMINISTRADOR_D',   
+            params: {
+                ['idSesion'] : this.datosApp.idSesion,
+                ['idAdministrador'] : idAdministrador,
+               
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    
+
 
 }

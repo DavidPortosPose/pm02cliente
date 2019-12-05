@@ -3,6 +3,8 @@ import { DatosAppService, Idioma, Rol } from './../../datos/datos-app.service';
 import { EmpresaGestionParams } from './empresa-getion.params';
 import { EmpresaGestionIdioma, EmpresaGestionIdiomaEn, EmpresaGestionIdiomaGl, EmpresaGestionIdiomaEs } from './empresa-gestion.idioma';
 import { Component, OnInit } from '@angular/core';
+import { AdministradorParams } from '../administrador/administrador.params';
+
 
 @Component({
   selector: 'app-empresa-gestion',
@@ -14,6 +16,7 @@ export class EmpresaGestionPage implements OnInit {
   private empresaGestionParams: EmpresaGestionParams;
   public verAvanzadas: boolean;
   private usuarioEmpresaParams: UsuarioEmpresaParams;
+  private administradorParams: AdministradorParams;
 
 
 
@@ -24,17 +27,26 @@ export class EmpresaGestionPage implements OnInit {
                               (this.datosApp.rol === Rol.ROL_ADMIN);
 
     this.usuarioEmpresaParams = null;
+    this.administradorParams = null;
   }
 
   ngOnInit() {
   }
 
-  private ionViewDidEnter() {
+  private ionViewDidEnter() { // Vueltas
     if ((this.usuarioEmpresaParams !== null) &&
     ((this.usuarioEmpresaParams.parametrosSalida.ok) ||
     (this.usuarioEmpresaParams.parametrosSalida.cancelar))) {
       /* Realizar acciones*/
       this.usuarioEmpresaParams = null;
+     
+    }
+
+    if ((this.administradorParams !== null) &&
+    ((this.administradorParams.parametrosSalida.ok) ||
+    (this.administradorParams.parametrosSalida.cancelar))) {
+      /* Realizar acciones*/
+      this.administradorParams = null;
     }
 
   }
@@ -59,6 +71,13 @@ export class EmpresaGestionPage implements OnInit {
     this.usuarioEmpresaParams.parametrosEntrada.idEmpresa = 
     this.empresaGestionParams.parametrosEntrada.idEmpresa;
     this.datosApp.pilaParams.push(this.usuarioEmpresaParams);
+  }
+
+  public adminClick() {
+    this.administradorParams = new AdministradorParams();
+    this.administradorParams.parametrosEntrada.idEmpresa = 
+    this.empresaGestionParams.parametrosEntrada.idEmpresa;
+    this.datosApp.pilaParams.push(this.administradorParams);
   }
 
 
