@@ -17,7 +17,7 @@
     (ionChange)='buscarItems()' 
     ></ion-searchbar>
   </ion-toolbar>
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab *ngIf="!seleccionar" vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button size='small'>
       <ion-icon name="menu"></ion-icon>
     </ion-fab-button>
@@ -37,13 +37,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-spinner *ngIf='buscando' name="bubbles"></ion-spinner>       
+    <ion-spinner *ngIf='buscando'></ion-spinner>
   <ion-list>
     <ion-item *ngFor="let item of items" >
         <ion-button fill='clear' (click)='usuarioEmpresaClick(item)'> 
-            {{item.NOMBRE}} &nbsp; {{item.APELLIDOS}}
-        </ion-button>
-        
+            {{item.NOMBRE}} &nbsp;  {{item.APELLIDOS}}
+        </ion-button>        
     </ion-item>
   </ion-list>
 

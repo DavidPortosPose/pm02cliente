@@ -16,7 +16,7 @@ export class UsuarioEmpresaIdioma {
 export class UsuarioEmpresaIdiomaEs extends UsuarioEmpresaIdioma {
     constructor() {
         super();
-        this.titulo = 'Empresas';
+        this.titulo = 'Usuarios';
         this.editar = 'Editar';
         this.borrar = 'Borrar';
         this.cancelar = 'Cancelar';
@@ -32,7 +32,7 @@ export class UsuarioEmpresaIdiomaEs extends UsuarioEmpresaIdioma {
 export class UsuarioEmpresaIdiomaGl extends UsuarioEmpresaIdioma {
     constructor() {
         super();
-        this.titulo = 'Empresas';
+        this.titulo = 'Usuarios';
         this.editar = 'Editar';
         this.borrar = 'Borrar';
         this.cancelar = 'Cancelar';
@@ -49,7 +49,7 @@ export class UsuarioEmpresaIdiomaGl extends UsuarioEmpresaIdioma {
 export class UsuarioEmpresaIdiomaEn extends UsuarioEmpresaIdioma {
     constructor() {
         super();
-        this.titulo = 'Companies';
+        this.titulo = 'Usuarios';
         this.editar = 'Edit';
         this.borrar = 'Delete';
         this.cancelar = 'Cancel';

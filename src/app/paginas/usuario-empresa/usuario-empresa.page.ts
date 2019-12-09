@@ -22,12 +22,14 @@ export class UsuarioEmpresaPage implements OnInit {
   public activo = true;
   public patronBuscar = '';
   public buscando = false;
+  public seleccionar: boolean;
 
   constructor(private datosApp: DatosAppService) { 
     this.setIdioma();
     this.usuarioEmpresaParams = datosApp.pilaParams.getTop() as UsuarioEmpresaParams;
     this.usuarioEmpresaEditParams = null;
     this.clienteRest01 = new ClienteRest01(datosApp);
+    this.seleccionar = this.usuarioEmpresaParams.parametrosEntrada.seleccionar;
   }
 
   ngOnInit() {
@@ -59,6 +61,7 @@ export class UsuarioEmpresaPage implements OnInit {
   }
 
   private restUsuarioEmpresaSelectCb2(){
+   
     this.buscando = false;
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
@@ -74,12 +77,8 @@ export class UsuarioEmpresaPage implements OnInit {
     this.buscando = true;
     this.clienteRest01.setRetorno(this, this.restUsuarioEmpresaSelectCb);
     this.clienteRest01.usuarioEmpresaSelect(
-        this.usuarioEmpresaParams.parametrosEntrada.idEmpresa,
-        this.patronBuscar, this.activo);
-    
-      
-    
-    
+      this.usuarioEmpresaParams.parametrosEntrada.idEmpresa,
+      this.patronBuscar, this.activo);
   }
 
   private restUsuarioEmpresaDeleteCb2(){
@@ -154,8 +153,18 @@ async confirmarDelete(item) {
 
   await alert.present();
 }
+public usuarioEmpresaClick(item) {
+  if(this.seleccionar) {
+    this.usuarioEmpresaParams.parametrosSalida.ok = true;
+    this.usuarioEmpresaParams.parametrosSalida.idUsuarioEmpresa = 
+    item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa]; 
+    this.datosApp.pilaParams.pop();
+  }else  {
+    this.usuarioEmpresaMenu(item);
+  }
+}
 
-async usuarioEmpresaClick(item) {
+async usuarioEmpresaMenu(item) {
   const activo = this.datosApp.util.stringToBoolean(item[this.clienteRest01.tablaUsuarioEmpresa.activo]);
   const actionSheet = await this.datosApp.actionSheetController.create({
     header: item[this.clienteRest01.tablaUsuarioEmpresa.nombre] + ' ' +

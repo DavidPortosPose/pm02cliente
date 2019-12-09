@@ -1,10 +1,8 @@
-import { Params } from 'src/app/lib/clases/params';
-
+import { Params } from './../../lib/clases/params';
 export class AdministradorParams extends Params{
 
     public parametrosEntrada = {
         idEmpresa: ''
-
     };
 
     public parametrosSalida = {

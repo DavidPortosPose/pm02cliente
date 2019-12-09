@@ -1,10 +1,9 @@
+import { AdministradorParams } from './../administrador/administrador.params';
 import { UsuarioEmpresaParams } from './../usuario-empresa/usuario-empresa.params';
 import { DatosAppService, Idioma, Rol } from './../../datos/datos-app.service';
 import { EmpresaGestionParams } from './empresa-getion.params';
 import { EmpresaGestionIdioma, EmpresaGestionIdiomaEn, EmpresaGestionIdiomaGl, EmpresaGestionIdiomaEs } from './empresa-gestion.idioma';
 import { Component, OnInit } from '@angular/core';
-import { AdministradorParams } from '../administrador/administrador.params';
-
 
 @Component({
   selector: 'app-empresa-gestion',
@@ -17,6 +16,7 @@ export class EmpresaGestionPage implements OnInit {
   public verAvanzadas: boolean;
   private usuarioEmpresaParams: UsuarioEmpresaParams;
   private administradorParams: AdministradorParams;
+
 
 
 
@@ -33,13 +33,12 @@ export class EmpresaGestionPage implements OnInit {
   ngOnInit() {
   }
 
-  private ionViewDidEnter() { // Vueltas
+  private ionViewDidEnter() {
     if ((this.usuarioEmpresaParams !== null) &&
     ((this.usuarioEmpresaParams.parametrosSalida.ok) ||
     (this.usuarioEmpresaParams.parametrosSalida.cancelar))) {
       /* Realizar acciones*/
       this.usuarioEmpresaParams = null;
-     
     }
 
     if ((this.administradorParams !== null) &&
@@ -73,9 +72,9 @@ export class EmpresaGestionPage implements OnInit {
     this.datosApp.pilaParams.push(this.usuarioEmpresaParams);
   }
 
-  public adminClick() {
+  public adminClick(){
     this.administradorParams = new AdministradorParams();
-    this.administradorParams.parametrosEntrada.idEmpresa = 
+    this.administradorParams.parametrosEntrada.idEmpresa =
     this.empresaGestionParams.parametrosEntrada.idEmpresa;
     this.datosApp.pilaParams.push(this.administradorParams);
   }

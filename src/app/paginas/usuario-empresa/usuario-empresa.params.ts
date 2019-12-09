@@ -2,13 +2,15 @@ import { Params } from './../../lib/clases/params';
 export class UsuarioEmpresaParams extends Params{
 
     public parametrosEntrada = {
-        idEmpresa: ''
+        idEmpresa: '',
+        seleccionar: false
 
     };
 
     public parametrosSalida = {
         ok: false,
-        cancelar: false
+        cancelar: false,
+        idUsuarioEmpresa: ''
     };
 
     constructor() {

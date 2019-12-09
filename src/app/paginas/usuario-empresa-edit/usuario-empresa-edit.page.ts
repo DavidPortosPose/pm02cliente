@@ -70,7 +70,6 @@ export class UsuarioEmpresaEditPage implements OnInit {
   }
 
   private restUsuarioEmpresaInsertCb2(){
-    
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
@@ -111,7 +110,6 @@ export class UsuarioEmpresaEditPage implements OnInit {
   }
 
   private restUsuarioEmpresaUpdateCb2(){
- 
     if (this.clienteRest01.error) {
       this.clienteRest01.mostrarMensajeError();
     } else {
@@ -145,7 +143,7 @@ export class UsuarioEmpresaEditPage implements OnInit {
 
   public aceptarClick(){
     if (this.comprobarForm()){
-        if (this.usuarioEmpresaEditParams.parametrosEntrada.nuevo) {
+        if (this.usuarioEmpresaEditParams.parametrosEntrada.nuevo){
           this.restUsuarioEmpresaInsert();
         } else {
          this.restUsuarioEmpresaUpdate();

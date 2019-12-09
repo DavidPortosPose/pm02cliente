@@ -18,7 +18,7 @@
       <ion-icon name="menu"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="bottom">
-      <ion-fab-button (click)="administradorNuevoClick()">
+      <ion-fab-button (click)="usuariosClick()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
       <ion-fab-button *ngIf="!activo" (click)="verActivosClick()">
@@ -36,7 +36,7 @@
   <ion-list>
     <ion-item *ngFor="let item of items" >
         <ion-button fill='clear' (click)='administradorClick(item)'> 
-            {{item.NOMBRE}}  {{item.APELLIDOS}} 
+            {{item.NOMBRE}} {{item.APELLIDOS}}
         </ion-button>        
     </ion-item>
   </ion-list>
