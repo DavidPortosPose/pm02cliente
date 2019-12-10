@@ -8,6 +8,7 @@ export class AdministradorIdioma {
     public activar: string;
     public desactivar: string;
     public noActivos: string;
+    public operacionOk: string;
 
 
 }
@@ -24,6 +25,7 @@ export class AdministradorIdiomaEs extends AdministradorIdioma {
         this.activar = 'Activar';
         this.desactivar = 'Desactivar';
         this.noActivos = 'No activos';
+        this.operacionOk = 'Operación realizada correctamente';
     }
 }
 
@@ -39,6 +41,7 @@ export class AdministradorIdiomaGl extends AdministradorIdioma {
         this.activar = 'Activar';
         this.desactivar = 'Desactivar';
         this.noActivos = 'Non activos';
+        this.operacionOk = 'Operación realizada correctamente';
 
     }
 }
@@ -55,5 +58,6 @@ export class AdministradorIdiomaEn extends AdministradorIdioma {
         this.activar = 'Enable';
         this.desactivar = 'Disable';
         this.noActivos = 'No actives';
+        this.operacionOk = 'Operación realized correctly';
     }
 }

@@ -3,6 +3,7 @@ export class AdministradorParams extends Params{
 
     public parametrosEntrada = {
         idEmpresa: ''
+        
     };
 
     public parametrosSalida = {
