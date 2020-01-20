@@ -6,23 +6,20 @@
       </ion-button>
       <ion-title>
         {{textosIdioma.titulo}}
+        <ion-badge color="primary">{{items.length}}</ion-badge>
         <ion-badge *ngIf="!activo" color="danger" > 
           {{textosIdioma.noActivos}}
         </ion-badge>  
       </ion-title>
+      
     </ion-buttons>
-    <ion-searchbar debounce="500" 
-    placeholder='{{textosIdioma.apellidosBuscar}}' 
-    [(ngModel)]='patronBuscar'
-    (ionChange)='buscarItems()' 
-    ></ion-searchbar>
   </ion-toolbar>
-  <ion-fab *ngIf='!seleccionar' vertical="top" horizontal="end" slot="fixed">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button size='small'>
       <ion-icon name="menu"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="bottom">
-      <ion-fab-button (click)="empresaEditNuevoClick()">
+      <ion-fab-button (click)="articuloAnadirClick()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
       <ion-fab-button *ngIf="!activo" (click)="verActivosClick()">
@@ -37,11 +34,10 @@
 </ion-header>
 
 <ion-content>
-    <ion-spinner *ngIf='buscando'></ion-spinner>
   <ion-list>
     <ion-item *ngFor="let item of items" >
-        <ion-button fill='clear' (click)='usuarioEmpresaClick(item)'> 
-            {{item.NOMBRE}} &nbsp;  {{item.APELLIDOS}}
+        <ion-button fill='clear' (click)='articuloClick(item)'> 
+            {{item.NOMBRE}} {{item.PRECIO}} 
         </ion-button>        
     </ion-item>
   </ion-list>

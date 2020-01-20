@@ -1,3 +1,4 @@
+import { ArticuloParams } from './../articulo/articulo.params';
 import { AdministradorParams } from './../administrador/administrador.params';
 import { UsuarioEmpresaParams } from './../usuario-empresa/usuario-empresa.params';
 import { DatosAppService, Idioma, Rol } from './../../datos/datos-app.service';
@@ -16,6 +17,7 @@ export class EmpresaGestionPage implements OnInit {
   public verAvanzadas: boolean;
   private usuarioEmpresaParams: UsuarioEmpresaParams;
   private administradorParams: AdministradorParams;
+  private articuloParams: ArticuloParams;
 
 
 
@@ -28,6 +30,8 @@ export class EmpresaGestionPage implements OnInit {
 
     this.usuarioEmpresaParams = null;
     this.administradorParams = null;
+    this.articuloParams = null;
+
   }
 
   ngOnInit() {
@@ -46,6 +50,13 @@ export class EmpresaGestionPage implements OnInit {
     (this.administradorParams.parametrosSalida.cancelar))) {
       /* Realizar acciones*/
       this.administradorParams = null;
+    }
+
+    if ((this.articuloParams !== null) &&
+    ((this.articuloParams.parametrosSalida.ok) ||
+    (this.articuloParams.parametrosSalida.cancelar))) {
+      /* Realizar acciones*/
+      this.articuloParams = null;
     }
 
   }
@@ -77,6 +88,13 @@ export class EmpresaGestionPage implements OnInit {
     this.administradorParams.parametrosEntrada.idEmpresa =
     this.empresaGestionParams.parametrosEntrada.idEmpresa;
     this.datosApp.pilaParams.push(this.administradorParams);
+  }
+
+  public articulosClick(){
+    this.articuloParams = new ArticuloParams();
+    this.articuloParams.parametrosEntrada.idEmpresa = 
+    this.empresaGestionParams.parametrosEntrada.idEmpresa;
+    this.datosApp.pilaParams.push(this.articuloParams);
   }
 
 

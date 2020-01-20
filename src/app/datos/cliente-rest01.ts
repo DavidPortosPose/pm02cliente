@@ -48,6 +48,15 @@ public tablaAdministrador = {
     activo: 'ACTIVO'
 };
 
+public tablaArticulo = {
+    idArticulo: 'ID_ARTICULO',
+    idEmpresa: 'ID_EMPRESA',
+    nombre: 'NOMBRE',
+    precio: 'PRECIO',
+    iva: 'IVA',
+    activo: 'ACTIVO'
+};
+
 
 
 
@@ -85,6 +94,9 @@ public mostrarMensajeError(){
             break;
         case 'EX_ROL_ERROR':
             this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_ROL_ERROR);
+            break;
+        case 'EX_ARTICULO_NUM_MAXIMO':
+            this.datosApp.mensaje.mostrarMensajeError(this.textosIdioma.EX_ARTICULO_NUM_MAXIMO);
             break;
     }
 }
@@ -330,6 +342,84 @@ public mostrarMensajeError(){
             params: {
                 ['idSesion'] : this.datosApp.idSesion,
                 ['idAdministrador'] : idAdministrador
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public articuloSelect(idEmpresa: string, activo: boolean){
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ARTICULO_S',
+            params: {
+                ['idEmpresa'] : idEmpresa,
+                ['activo'] : this.datosApp.util.booleanToString(activo),
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public articuloSelectId(idEmpresa: string, idArticulo: string){
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ARTICULO_S_ID',
+            params: {
+                ['idEmpresa'] : idEmpresa,
+                ['idArticulo'] : idArticulo
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public articuloSelectContar(idEmpresa: string){
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ARTICULO_S_CONTAR',
+            params: {
+                ['idEmpresa'] : idEmpresa,
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public articuloInsert(idEmpresa: string){
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ARTICULO_I',
+            params: {
+                ['idEmpresa'] : idEmpresa,
+                ['idArticulo_generarId'] : ''
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public articuloUpdate(idArticulo: string, nombre: string, precio: number,
+                          iva: number) {
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ARTICULO_U',
+            params: {
+                ['idArticulo'] : idArticulo,
+                ['nombre'] : nombre,
+                ['precio'] : precio,
+                ['iva'] : iva,
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public articuloUpdateActivo(idArticulo: string, activo: boolean ){
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ARTICULO_U_ACTIVO',
+            params: {
+                ['idArticulo'] : idArticulo,
+                ['activo'] : this.datosApp.util.booleanToString(activo),
+            }
+        };
+        this.peticionRest(datosEnviar);
+    }
+
+    public articuloDelete(idArticulo: string ){
+        const datosEnviar: DatosEnviar = {
+            operacion: 'PUB_ARTICULO_D',
+            params: {
+                ['idArticulo'] : idArticulo
             }
         };
         this.peticionRest(datosEnviar);

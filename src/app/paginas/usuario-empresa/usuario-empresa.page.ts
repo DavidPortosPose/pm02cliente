@@ -153,16 +153,18 @@ async confirmarDelete(item) {
 
   await alert.present();
 }
-public usuarioEmpresaClick(item) {
-  if(this.seleccionar) {
+
+public usuarioEmpresaClick(item){
+  if (this.seleccionar){
     this.usuarioEmpresaParams.parametrosSalida.ok = true;
-    this.usuarioEmpresaParams.parametrosSalida.idUsuarioEmpresa = 
-    item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa]; 
+    this.usuarioEmpresaParams.parametrosSalida.idUsuarioEmpresa=
+    item[this.clienteRest01.tablaUsuarioEmpresa.idUsuarioEmpresa];
     this.datosApp.pilaParams.pop();
-  }else  {
+  } else {
     this.usuarioEmpresaMenu(item);
   }
 }
+
 
 async usuarioEmpresaMenu(item) {
   const activo = this.datosApp.util.stringToBoolean(item[this.clienteRest01.tablaUsuarioEmpresa.activo]);

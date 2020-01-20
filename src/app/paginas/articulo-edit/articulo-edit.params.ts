@@ -1,7 +1,8 @@
 import { Params } from './../../lib/clases/params';
-export class AdministradorParams extends Params{
+export class ArticuloEditParams extends Params{
 
     public parametrosEntrada = {
+        idArticulo: '',
         idEmpresa: ''
     };
 
@@ -11,6 +12,6 @@ export class AdministradorParams extends Params{
     };
 
     constructor() {
-        super('/administrador');
+        super('/articulo-edit');
     }
 }

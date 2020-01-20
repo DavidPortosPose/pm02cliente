@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)='volverClick()'>
+          <ion-icon name="arrow-back"></ion-icon> 
+      </ion-button>
+      <ion-title>{{textosIdioma.titulo}}</ion-title>  
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item>
+        <ion-label position='floating'>{{textosIdioma.nombre}}</ion-label>
+        <ion-input [(ngModel)]='form.nombre'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position='floating'>{{textosIdioma.precio}}</ion-label>
+        <ion-input type='number' [(ngModel)]='form.precio'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position='floating'>{{textosIdioma.iva}}</ion-label>
+        <ion-input type='number' [(ngModel)]='form.iva'></ion-input>
+      </ion-item>
+      
+  </ion-list>
+  <ion-button shape='round' fill='outline' 
+      (click)='aceptarClick()'>
+      {{textosIdioma.aceptar}}
+  </ion-button>
+
+</ion-content>
+
+

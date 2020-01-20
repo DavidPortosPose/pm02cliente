@@ -13,6 +13,8 @@ const routes: Routes = [
   { path: 'usuario-empresa', loadChildren: './paginas/usuario-empresa/usuario-empresa.module#UsuarioEmpresaPageModule' },
   { path: 'usuario-empresa-edit', loadChildren: './paginas/usuario-empresa-edit/usuario-empresa-edit.module#UsuarioEmpresaEditPageModule' },
   { path: 'administrador', loadChildren: './paginas/administrador/administrador.module#AdministradorPageModule' },
+  { path: 'articulo', loadChildren: './paginas/articulo/articulo.module#ArticuloPageModule' },
+  { path: 'articulo-edit', loadChildren: './paginas/articulo-edit/articulo-edit.module#ArticuloEditPageModule' },
 ];
 
 @NgModule({
